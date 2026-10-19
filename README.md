@@ -74,13 +74,10 @@ Apple Watch не обов'язковий. Якщо він є, годинник �
 ### 5. Відкрий проєкт і запусти
 
 1. Розпакуй архів, наприклад у `~/Developer/Shah`.
-2. Відкрий файл **`Config/Base.xcconfig`** у будь-якому редакторі (або в Xcode)
-   і заміни ідентифікатор на свій, унікальний:
-
-   ```
-   APP_BUNDLE_ID = com.yourname.shah      ← було
-   APP_BUNDLE_ID = com.ivanpetrenko.shah  ← стало (латиниця, без пробілів)
-   ```
+2. Ідентифікатор застосунку вже вписаний у **`Config/Base.xcconfig`**:
+   `APP_BUNDLE_ID = com.nokk1993.shah`. Нічого міняти не треба. Змінюй його
+   лише якщо Xcode напише, що ідентифікатор недоступний (див.
+   [Типові помилки](#типові-помилки)).
 
 3. Двічі клацни **`Shah.xcodeproj`**.
 4. Ліворуч клацни синю іконку проєкту **Shah** → у списку *Targets* обери
@@ -163,7 +160,7 @@ Xcode по Wi-Fi, коли Mac і телефон в одній мережі й �
 
 | Що бачиш | Що робити |
 |---|---|
-| **Failed to register bundle identifier** / *The app identifier "com.…" cannot be registered to your development team* | Такий ідентифікатор уже зайнятий. Зміни `APP_BUNDLE_ID` у `Config/Base.xcconfig` на щось унікальне, наприклад додай рік: `com.ivanpetrenko.shah2026`. |
+| **Cannot create a iOS App Development provisioning profile for "com.…"** / **No profiles for "com.…" were found** / **Failed to register bundle identifier** | Ідентифікатор зайнятий кимось іншим. У `Config/Base.xcconfig` додай щось у кінці `APP_BUNDLE_ID`, наприклад `com.nokk1993.shah2`, збережи (⌘S), потім у Xcode **Signing & Capabilities → Try Again** або просто ▶ Run. |
 | **Personal development teams … do not support the *HealthKit Background Delivery* capability** | У `Config/Base.xcconfig` постав `SHAH_CAPABILITIES = NoBackgroundDelivery`. Шаг працюватиме так само, тільки віджети оновлюватимуться за розкладом, а не одразу після нового запису в Health. |
 | **… do not support the *App Groups* capability** | Постав `SHAH_CAPABILITIES = Basic`. Віджети тоді самі читають Health (коли iPhone розблокований), але не бачать твою ціль і одиниці з налаштувань: показують 5 км і одиниці регіону. |
 | **Maximum App ID limit reached** / *You have reached the maximum number of App IDs* | Безкоштовний акаунт може створити **10 App ID за 7 днів**. Одна збірка Шагу займає 2 (застосунок + віджети), UI-тести ще 1. Не міняй `APP_BUNDLE_ID` без потреби, і ліміт не вичерпається. Якщо вже вичерпав, зачекай до 7 днів. |
